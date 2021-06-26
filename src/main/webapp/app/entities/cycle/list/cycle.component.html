@@ -1,0 +1,76 @@
+<div>
+  <h2 id="page-heading" data-cy="CycleHeading">
+    <span>Cycles</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-cycle"
+        [routerLink]="['/cycle/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Cycle </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="cycles?.length === 0">
+    <span>No cycles found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="cycles && cycles.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Reps</span></th>
+          <th scope="col"><span>Volume</span></th>
+          <th scope="col"><span>Excercise</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cycle of cycles; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/cycle', cycle.id, 'view']">{{ cycle.id }}</a>
+          </td>
+          <td>{{ cycle.reps }}</td>
+          <td>{{ cycle.volume }}</td>
+          <td>
+            <div *ngIf="cycle.excercise">
+              <a [routerLink]="['/excercise', cycle.excercise?.id, 'view']">{{ cycle.excercise?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/cycle', cycle.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/cycle', cycle.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(cycle)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

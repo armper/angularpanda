@@ -1,0 +1,134 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-routine-heading" data-cy="RoutineCreateUpdateHeading">Create or edit a Routine</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dateStarted">Date Started</label>
+          <div class="input-group">
+            <input
+              id="field_dateStarted"
+              data-cy="dateStarted"
+              type="text"
+              class="form-control"
+              name="dateStarted"
+              ngbDatepicker
+              #dateStartedDp="ngbDatepicker"
+              formControlName="dateStarted"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateStartedDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dateEnded">Date Ended</label>
+          <div class="input-group">
+            <input
+              id="field_dateEnded"
+              data-cy="dateEnded"
+              type="text"
+              class="form-control"
+              name="dateEnded"
+              ngbDatepicker
+              #dateEndedDp="ngbDatepicker"
+              formControlName="dateEnded"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateEndedDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_goalDate">Goal Date</label>
+          <div class="input-group">
+            <input
+              id="field_goalDate"
+              data-cy="goalDate"
+              type="text"
+              class="form-control"
+              name="goalDate"
+              ngbDatepicker
+              #goalDateDp="ngbDatepicker"
+              formControlName="goalDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="goalDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_startingBodyWeight">Starting Body Weight</label>
+          <input
+            type="number"
+            class="form-control"
+            name="startingBodyWeight"
+            id="field_startingBodyWeight"
+            data-cy="startingBodyWeight"
+            formControlName="startingBodyWeight"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_endingBodyWeight">Ending Body Weight</label>
+          <input
+            type="number"
+            class="form-control"
+            name="endingBodyWeight"
+            id="field_endingBodyWeight"
+            data-cy="endingBodyWeight"
+            formControlName="endingBodyWeight"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="field_users">User</label>
+          <select class="form-control" id="field_users" data-cy="user" multiple name="users" formControlName="users">
+            <option
+              [ngValue]="getSelectedUser(userOption, editForm.get('users')!.value)"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

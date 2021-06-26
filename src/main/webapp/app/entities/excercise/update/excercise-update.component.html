@@ -1,0 +1,91 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-excercise-heading" data-cy="ExcerciseCreateUpdateHeading">Create or edit a Excercise</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null"></option>
+            <option value="BARBELL">BARBELL</option>
+            <option value="BAR">BAR</option>
+            <option value="MACHINE">MACHINE</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_currentVolume">Current Volume</label>
+          <input
+            type="number"
+            class="form-control"
+            name="currentVolume"
+            id="field_currentVolume"
+            data-cy="currentVolume"
+            formControlName="currentVolume"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_startingVolume">Starting Volume</label>
+          <input
+            type="number"
+            class="form-control"
+            name="startingVolume"
+            id="field_startingVolume"
+            data-cy="startingVolume"
+            formControlName="startingVolume"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_goalVolume">Goal Volume</label>
+          <input
+            type="number"
+            class="form-control"
+            name="goalVolume"
+            id="field_goalVolume"
+            data-cy="goalVolume"
+            formControlName="goalVolume"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_routine">Routine</label>
+          <select class="form-control" id="field_routine" data-cy="routine" name="routine" formControlName="routine">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="routineOption.id === editForm.get('routine')!.value?.id ? editForm.get('routine')!.value : routineOption"
+              *ngFor="let routineOption of routinesSharedCollection; trackBy: trackRoutineById"
+            >
+              {{ routineOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

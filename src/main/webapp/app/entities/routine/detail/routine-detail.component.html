@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="routine">
+      <h2 data-cy="routineDetailsHeading"><span>Routine</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ routine.id }}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+          <span>{{ routine.name }}</span>
+        </dd>
+        <dt><span>Date Started</span></dt>
+        <dd>
+          <span>{{ routine.dateStarted | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Date Ended</span></dt>
+        <dd>
+          <span>{{ routine.dateEnded | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Goal Date</span></dt>
+        <dd>
+          <span>{{ routine.goalDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Starting Body Weight</span></dt>
+        <dd>
+          <span>{{ routine.startingBodyWeight }}</span>
+        </dd>
+        <dt><span>Ending Body Weight</span></dt>
+        <dd>
+          <span>{{ routine.endingBodyWeight }}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+          <span *ngFor="let user of routine.users; let last = last"> {{ user.id }}{{ last ? '' : ', ' }} </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/routine', routine.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

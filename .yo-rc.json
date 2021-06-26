@@ -42,7 +42,9 @@
     "jwtSecretKey": "NjUzYzI2YzI1YjI3YWVmZTAxNTUwMzI3YjNjNTgyY2VlMTk4MWM1YjkwOTQ4MzQ0MTc0ZGNmYTFiMzJjNjZhYTQ5NzVjYWE5ZTE5ZmRkM2Q3ZTI4MWM1YmMyMzBhMzg0MjQxYWQzYTRmOWE4YjA5YzgxMjc1MjQ4MTBlMmRmZDU=",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "reactive": false
+    "reactive": false,
+    "entities": ["Routine", "Excercise", "Cycle"],
+    "lastLiquibaseTimestamp": 1624670530000
   },
   "git-provider": "GitHub",
   "git-company": "armper",

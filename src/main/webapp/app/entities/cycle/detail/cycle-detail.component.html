@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="cycle">
+      <h2 data-cy="cycleDetailsHeading"><span>Cycle</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ cycle.id }}</span>
+        </dd>
+        <dt><span>Reps</span></dt>
+        <dd>
+          <span>{{ cycle.reps }}</span>
+        </dd>
+        <dt><span>Volume</span></dt>
+        <dd>
+          <span>{{ cycle.volume }}</span>
+        </dd>
+        <dt><span>Excercise</span></dt>
+        <dd>
+          <div *ngIf="cycle.excercise">
+            <a [routerLink]="['/excercise', cycle.excercise?.id, 'view']">{{ cycle.excercise?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/cycle', cycle.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
